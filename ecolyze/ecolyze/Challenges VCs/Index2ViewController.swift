@@ -41,7 +41,7 @@ class Index2ViewController: UIViewController {
         
         if Singleton.sharedInstance.numLabel == nil {
             
-            Singleton.sharedInstance.numLabel = "\(Singleton.sharedInstance.index0)"
+            Singleton.sharedInstance.numLabel = "\(Singleton.sharedInstance.index2)"
       
         }
        

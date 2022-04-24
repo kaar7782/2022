@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import SwiftUI
 //var goal : String?
 
 class HomeViewController: UIViewController {
@@ -20,8 +21,47 @@ class HomeViewController: UIViewController {
     var goal : String?
     
     
+    
+    
     var circleProgressView: ProgressView!
     var circleViewDuration: TimeInterval = 2
+
+  func setUpCircularProgressView() {
+
+        circleProgressView = ProgressView(frame: .zero)
+        circleProgressView.center = view.center
+        circleProgressView.createCircularPath()
+        circleProgressView.progressAnimation(duration: circleViewDuration, goalString: goal ?? "0")
+        view.addSubview(circleProgressView)
+
+    }
+    
+
+    override func viewWillAppear(_ animated: Bool) {
+        //print("view will appear",goal)
+        setUpCircularProgressView()
+        
+        goalLabel.text = goal
+        
+        let goalNumEntered = Double(goalLabel.text ?? " ")
+        
+        numLabel.text = Singleton.sharedInstance.numLabel
+        
+        let convertNumLabelDouble = Double(numLabel.text ?? " ")
+        
+        
+        if convertNumLabelDouble ?? 0.0 >= goalNumEntered ?? 0.0 {
+
+            goalAchievedLabel.text = "Goal Achieved!!!"
+            
+        }
+        else if goalNumEntered == nil {
+            
+            goalAchievedLabel.text = " "
+            
+        }
+
+    }
     
     override func viewDidLoad() {
         
@@ -29,43 +69,6 @@ class HomeViewController: UIViewController {
         
     }
     
-    
-  func setUpCircularProgressView() {
-
-        circleProgressView = ProgressView(frame: .zero)
-        circleProgressView.center = view.center
-        circleProgressView.createCircularPath()
-        circleProgressView.progressAnimation(duration: circleViewDuration)
-        view.addSubview(circleProgressView)
-
-    }
-    
-
-    override func viewWillAppear(_ animated: Bool) {
-        
-        setUpCircularProgressView()
-        
-        goalLabel.text = goal
-        
-        numLabel.text = Singleton.sharedInstance.numLabel
-        print (numLabel.text ?? " ")
-        
-        if Singleton.sharedInstance.numLabel == "35" {
-            goalAchievedLabel.text = "Goal Achieved!!!"
-        }
-
-    }
-    
 
 }
 
-/* function to make .toValue turn what is entered in the num label into an integer and then divide it by what is entered into the goalLabel.text - however goallabel.text is not accessible in this vc
-    
-     func toValueConvert(){
-     
-        let currentNumber = Int(Singleton.sharedInstance.numLabel!)!
-        let goalNumber = 35
-        let newNumber = currentNumber / goalNumber
-        circularProgressAnimation.toValue = newNumber
-     
-     } */

@@ -13,6 +13,13 @@ class GoalViewController: UIViewController {
 
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var goalTextField: UITextField!
+//        didSet {
+//            let leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 2.0))
+//            goalTextField.leftView = leftView
+//            goalTextField.leftViewMode = .always
+//        }
+    
+    
     @IBOutlet weak var getStartedGoalButton: UIButton!
     
     override func viewDidLoad() {
@@ -29,6 +36,8 @@ class GoalViewController: UIViewController {
             textfield.borderStyle = .none
             
             textfield.layer.addSublayer(bottomLine)
+            
+            
             
         }
         
@@ -48,9 +57,16 @@ class GoalViewController: UIViewController {
     
     func validateFields() -> String? {
 
-        if goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
+        if goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "9" || goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "8" || goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "7" ||
+            goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "6" ||               goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "5" || goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "4" ||
+                goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "3" || goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "2" || goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "1" || goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == "0"
+            {
+            
+            return "Please enter a number higher than 10"
+        }
+        else if goalTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) == ""
         {
-            return "Please fill in a goal. Recommended is -30 lbs."
+            return "Please fill in a goal. Recommended is -35 lbs."
         }
         
         
@@ -69,7 +85,7 @@ class GoalViewController: UIViewController {
         
             let db = Firestore.firestore()
             let user = Auth.auth().currentUser?.uid
-            //let uid = user.uid
+            
 //            let userCollection = db.collection("users").document(user!)
 //            userCollection.updateData(["goal" : goal])
             
@@ -108,6 +124,7 @@ class GoalViewController: UIViewController {
             let custMainVC = segue.destination as! UITabBarController
             let HomeVC = custMainVC.viewControllers!.first as! HomeViewController
             HomeVC.goal = goalTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+            //print("GVC homevc goal", HomeVC.goal)
             
             //print(goalTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines))
             

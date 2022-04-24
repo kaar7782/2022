@@ -14,7 +14,7 @@ class ProgressView: UIView {
     private var start = CGFloat(-Double.pi / 2)
     private var end = CGFloat(3 * Double.pi / 2)
 
-
+    var homeViewController = HomeViewController()
     
     override init(frame: CGRect) {
             super.init(frame: frame)
@@ -55,18 +55,25 @@ class ProgressView: UIView {
     
     
     
-    func progressAnimation(duration: TimeInterval) {
+    func progressAnimation(duration: TimeInterval, goalString:String) {
+        let goalNumber = Double(goalString)!
            
         let circularProgressAnimation = CABasicAnimation(keyPath: "strokeEnd")
                 
   
         if Singleton.sharedInstance.numLabel != nil  {
+            //print("in if")
             
             let currentNumber = Double(Singleton.sharedInstance.numLabel!)!
-            //let goalNumber = Double(goal ?? "35")!
-            let goalNumber = 35.0
-            let newNumber = currentNumber/goalNumber
             
+            //print("home vc goal ", homeViewController.goal)
+            //let goalNumber = Double(homeViewController.goal ?? "0") ?? 35.0
+            //let goalNumber = 35.0
+            //print("goal", goalNumber)
+            
+            let newNumber = currentNumber/goalNumber
+            //print("new number", newNumber)
+        
             circularProgressAnimation.duration = duration
             circularProgressAnimation.toValue = newNumber
             circularProgressAnimation.fillMode = .forwards
@@ -75,7 +82,7 @@ class ProgressView: UIView {
             
         }
         
-        //NEEDS to be if numLabel is equal to goal number entered, however need to figure out how to get goalLabel.text into progressView - add to singleton? or is that even possible?
+        //passed through parameters
         
         else if Singleton.sharedInstance.numLabel == "35" {
 
@@ -86,7 +93,6 @@ class ProgressView: UIView {
             progressLayer.add(circularProgressAnimation, forKey: "progressAnim")
 
         }
-        
         
         
     }

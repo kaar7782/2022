@@ -21,7 +21,7 @@ class Singleton: NSObject {
     var index3 = 7
     var index4 = 8
     
-    
+    //var goal : String?
    
 
 }

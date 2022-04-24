@@ -22,7 +22,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="m8N-Jm-8HY"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
